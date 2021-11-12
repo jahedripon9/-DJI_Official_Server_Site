@@ -22,6 +22,7 @@ async function run(){
         await client.connect();
         const database = client.db('DjiOfficial');
             const djiproductsCollection = database.collection('djiproducts');
+            const djiOrdersCollection = database.collection('orderProducts');
 
             // GET API
             app.get('/djiproducts', async(req, res)=>{
@@ -58,6 +59,34 @@ async function run(){
                 res.json(result);
                 
             })
+
+
+
+            // __________________________
+
+                // confirm order
+            app.post('/confirmOrder', async (req, res) => {
+                const result = await djiOrdersCollection.insertOne(req.body);
+                res.send(result);
+            });
+        
+            // my confirmOrder
+        
+            app.get('/myOrders/:email', async (req, res) => {
+                const result = await djiOrdersCollection
+                .find({ email: req.params.email })
+                .toArray();
+                res.send(result);
+            });
+        
+            // delete order
+        
+            app.delete('/deleteOrder/:id', async (req, res) => {
+                const result = await djiOrdersCollection.deleteOne({
+                _id: ObjectId(req.params.id),
+                });
+                res.send(result);
+            });
 
     }
     finally{

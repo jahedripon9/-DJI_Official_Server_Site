@@ -69,7 +69,7 @@ async function run(){
 run().catch(console.dir)
 
 app.get('/', (req, res)=>{
-    res.send('Food Wagon server is running');
+    res.send('DJI Official server is running');
   
 })
 app.listen(port, ()=>{

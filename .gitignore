@@ -1,3 +1,4 @@
 node_modules
 env
 dji-official-website-firebase-admin.json
+.vercel
